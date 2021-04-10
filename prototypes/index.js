@@ -27,39 +27,45 @@ const kittyPrompts = {
 
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let orangeKitties = kitties.filter(kitty => kitty.color === 'orange');
+
+    const result = orangeKitties.map(orangeKitty => orangeKitty.name);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // take in array of kitties, find orange kitties, store names in an array
   },
 
   sortByAge() {
     // Sort the kitties by their age
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let sortedKitties = kitties.sort((a, b) => {
+      return b.age - a.age;
+    });
+
+    const result = sortedKitties;
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // use sort() to access objects by kitty.age and sort b-a
   },
 
   growUp() {
-    // Return an array of kitties who have all grown up by 2 years e.g.
-    // [{
-    //   name: 'Felicia',
-    //   age: 4,
-    //   color: 'grey'
-    // },
-    // {
-    //   name: 'Tiger',
-    //   age: 7,
-    //   color: 'orange'
-    // },
-    // ...etc]
+    // Return an array of kitties who have all grown up by 2 years
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // let grownAssKitties = kitties.map(kitty => kitty.age += 2);
+    kitties.forEach(kitty => kitty.age += 2);
+    let grownAssKitties = kitties.sort((a, b) => {
+      return b.age - a.age;
+    });
+
+    const result = grownAssKitties;
+
     return result;
+
+    // Annotation:
+    // use map() to access each kitty.age and increment by 2
+    // use sort() to order kitties by age from b - a
   }
 };
 
@@ -152,8 +158,30 @@ const modPrompts = {
 
 // DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
+  // stockPerCake() {
+  //   let cakeStock = [];
+  //   const findCakeCount = cakes.reduce((finalOutput, currentCake) => {
+  //     const cakeName = currentCake.cakeFlavor;
+  //     const cakeInStock = currentCake.inStock;
+  //     finalOutput = {
+  //       flavor: cakeName,
+  //       inStock: cakeInStock,
+  //     };
+  //     cakeStock.push(finalOutput);
+  //     return cakeStock;
+  //   }, cakeStock);
+    
   stockPerCake() {
-    // Return an array of objects that include just the flavor of the cake and how
+    let cakeStock = [];
+    cakes.forEach(cake => {
+      let cakeObj = {
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock,
+      };
+      cakeStock.push(cakeObj);
+    });
+
+    // Return an array of objects .that include just the flavor of the cake and how
     // much of that cake is in stock e.g.
     // [
     //    { flavor: 'dark chocolate', inStock: 15 },
@@ -161,7 +189,8 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = findCakeCount;
+    const result = cakeStock;
     return result;
 
     // Annotation:
@@ -169,6 +198,8 @@ const cakePrompts = {
   },
 
   onlyInStock() {
+    let stockedCakes = cakes.filter(cake => cake.inStock);
+
     // Return an array of only the cakes that are in stock
     // e.g.
     // [
@@ -189,7 +220,7 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stockedCakes;
     return result;
 
     // Annotation:
@@ -200,11 +231,16 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let cakeStock = cakes.reduce((stock, cake) => {
+      return stock + cake.inStock;
+    }, 0);
+
+    const result = cakeStock;
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through cakes and using reduce() accumulate cake.inStock
+    // return value
   },
 
   allToppings() {
@@ -212,11 +248,17 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
+    let toppings = cakes.map()
+
+
+    // 
+
+
     const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    // return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // 
   },
 
   groceryList() {
