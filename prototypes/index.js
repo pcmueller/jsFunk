@@ -248,17 +248,31 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    let toppings = cakes.map()
+    
+    let retrieveUniqueToppings = cakes => {
+      let allToppings = [];
+      let uniqueToppings = [];
 
+      cakes.forEach(cake => {
+        cake.toppings.forEach(topping => {
+          allToppings.push(topping);
+        });
+      });
+      allToppings.forEach(topping => {
+        if (!uniqueToppings.includes(topping)) {
+          uniqueToppings.push(topping);
+        }
+      });
+      return uniqueToppings;
+    };
 
-    // 
-
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    // return result;
+    const result = retrieveUniqueToppings(cakes);
+    return result;
 
     // Annotation:
-    // 
+    // iterate through cakes array and map cakes.toppings array elements into new array
+    // iterate through toppings array and push into new "noDuplicates" array 
+    // any elements that aren't already included
   },
 
   groceryList() {
@@ -272,11 +286,31 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    let retrieveGroceryList = cakes => {
+      let allToppings = [];
+      let uniqueToppings = {};
+
+      cakes.forEach(cake => {
+        cake.toppings.forEach(topping => {
+          allToppings.push(topping);
+        });
+      });
+      allToppings.forEach(topping => {
+        if (!uniqueToppings[topping]) {
+          uniqueToppings[topping] = 1;
+        } else {
+          uniqueToppings[topping]++;
+        }
+      });
+      return uniqueToppings;
+    };
+
+    const result = retrieveGroceryList(cakes);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // use retrieve all toppings and store in array with 
   }
 };
 
