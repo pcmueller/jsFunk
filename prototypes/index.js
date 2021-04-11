@@ -369,7 +369,17 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let retrieveFEClassrooms = classrooms => {
+      let feClassrooms = [];
+      classrooms.forEach(classroom => {
+        if (classroom.program === 'FE') {
+          feClassrooms.push(classroom);
+        }
+      });
+      return feClassrooms;
+    };
+
+    const result = retrieveFEClassrooms(classrooms);
     return result;
 
     // Annotation:
@@ -384,7 +394,22 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let accumulateCapacities = classrooms => {
+      let capacities = {
+        feCapacity: 0,
+        beCapacity: 0,
+      };
+      classrooms.forEach(room => {
+        if (room.program === 'FE') {
+          capacities.feCapacity += room.capacity;
+        } else if (room.program === 'BE') {
+          capacities.beCapacity += room.capacity;
+        }
+      });
+      return capacities;
+    };
+
+    const result = accumulateCapacities(classrooms);
     return result;
 
     // Annotation:
@@ -393,8 +418,14 @@ const classPrompts = {
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
+    let sortedClassrooms = classrooms => {
+      let sortedRooms = classrooms.sort((a, b) => {
+        return a.capacity - b.capacity;
+      });
+      return sortedRooms;
+    };
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = sortedClassrooms(classrooms);
     return result;
 
     // Annotation:
@@ -420,8 +451,17 @@ const bookPrompts = {
     //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
     //   'Catch-22', 'Treasure Island']
 
+    let returnNonViolentBooks = books => {
+      let nonViolentBooks = [];
+      books.forEach(book => {
+        if (book.genre !== 'Horror' && book.genre !== 'True Crime') {
+          nonViolentBooks.push(book.title);
+        }
+      });
+      return nonViolentBooks;
+    };
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = returnNonViolentBooks(books);
     return result;
 
     // Annotation:
@@ -430,13 +470,28 @@ const bookPrompts = {
   },
   getNewBooks() {
     // return an array of objects containing all books that were
-    // published in the 90's and 00's. Inlucde the title and the year Eg:
+    // published in the 90's and 00's. Include the title and the year Eg:
 
     // [{ title: 'Harry Potter and the Sorcerer\'s Stone', year: 1997 },
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getNewerBooks = books => {
+      let newBooks = [];
+      books.forEach(book => {
+        if (book.published >= 1990 && book.published <= 2009) {
+          newBooks.push(
+            {
+              title: book.title,
+              year: book.published,
+            }
+          );
+        }
+      });
+      return newBooks;
+    };
+
+    const result = getNewerBooks(books);
     return result;
 
     // Annotation:
