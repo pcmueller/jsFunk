@@ -761,7 +761,25 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    let retrieveStars = stars => {
+      let allStars = [];
+      let constNames = Object.keys(constellations);
+      constNames.forEach(name => {
+        constellations[name].stars.forEach(star => {
+          allStars.push(star);
+        });
+      });
+      let matchingStars = [];
+      stars.forEach(star => {
+        if (allStars.includes(star.name)) {
+          matchingStars.push(star);
+        }
+      });
+      return matchingStars;
+    };
+
+    const result = retrieveStars(stars);
     return result;
 
     // Annotation:
@@ -779,7 +797,25 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let returnStarsByColor = stars => {
+      let allColors = [];
+      let starsByColor = {};
+      stars.forEach(star => {
+        allColors.push(star.color);
+      });
+      allColors.forEach(color => {
+        if (!starsByColor[color]) {
+          starsByColor[color] = [];
+        }
+      });
+      stars.forEach(star => {
+        starsByColor[star.color].push(star);
+      });
+
+      return starsByColor;
+    };
+
+    const result = returnStarsByColor(stars);
     return result;
 
     // Annotation:
@@ -800,8 +836,20 @@ const astronomyPrompts = {
     //    "Orion",
     //    "The Little Dipper" ]
 
+    let retrieveConstellations = stars => {
+      let orderedStars = stars.sort((a, b) => {
+        return a.visualMagnitude - b.visualMagnitude;
+      });
+      let constNames = [];
+      orderedStars.forEach(star => {
+        if (star.constellation !== '') {
+          constNames.push(star.constellation);
+        }
+      });
+      return constNames;
+    };
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = retrieveConstellations(stars);
     return result;
 
     // Annotation:
