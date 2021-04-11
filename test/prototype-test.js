@@ -375,7 +375,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Brewery Prompts", () => {
-    it.only("getBeerCount", () => {
+    it("getBeerCount", () => {
       const e = breweryPrompts.getBeerCount();
 
       expect(e).to.deep.equal(40)
@@ -495,7 +495,7 @@ describe("PROTOTYPES", () => {
   });
   
   describe("Boss Prompts", () => {
-    it("bossLoyalty", () => {
+    it.only("bossLoyalty", () => {
       const e = bossPrompts.bossLoyalty();
 
       expect(e).to.deep.equal([{

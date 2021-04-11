@@ -719,11 +719,19 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getTotalBeers = breweries => {
+      let totalBeers = breweries.reduce((total, brewery) => {    
+        return total + brewery.beers.length;
+      }, 0);
+      return totalBeers;
+    };
+
+    const result = getTotalBeers(breweries);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through each brewery and accumulate this.beers.length
+    // return accumulator
   },
 
   getBreweryBeerCount() {
@@ -735,7 +743,15 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getBeerCounts = breweries => {
+      let beerCounts = [];
+      breweries.forEach(brewery => {    
+        beerCounts.push({name: brewery.name, beerCount: brewery.beers.length});
+      });
+      return beerCounts;
+    };
+
+    const result = getBeerCounts(breweries);
     return result;
 
     // Annotation:
@@ -747,11 +763,27 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getHighestAbvBeer = breweries => {
+      let allBeers = [];
+      breweries.forEach(brewery => {
+        brewery.beers.forEach(beer => {
+          allBeers.push(beer);
+        });
+      });
+      let sortedBeers = allBeers.sort((a, b) => {
+        return b.abv - a.abv;
+      });
+
+      let [ highestAbvBeer ] = sortedBeers;
+      return highestAbvBeer;
+    };
+
+    const result = getHighestAbvBeer(breweries);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // use sort() to order beers from b.abv - a.abv and store in new array
+    // use destructuring to access first item in array and return
   }
 };
 
@@ -795,11 +827,28 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getInstructorStudentCounts = (instructors, cohorts) => {
+      let instructorObjects = [];
+      instructors.forEach(instructor => {
+        cohorts.forEach(cohort => {
+          if (cohort.module === instructor.module) {
+            let object = { name: instructor.name, studentCount: cohort.studentCount };
+            instructorObjects.push(object);
+          }
+        });
+      });
+      return instructorObjects;
+    };
+
+    const result = getInstructorStudentCounts(instructors, cohorts);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through instructors array, access each element's 'name', then within
+    // that loop, iterate through cohorts array and use conditional to identify
+    // element with this.module w/ value that equals instructor.module (1 level up)
+    // when conditional is true, use value of this.studentCount to interpolate in value of
+    // studentCount property in new object literal, to be pushed into new instructorObjects array
   },
 
   studentsPerInstructor() {
@@ -809,11 +858,33 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getStudentRatios = (instructors, cohorts) => {
+      let studentRatios = {};
+      cohorts.forEach(cohort => {
+        let teachers = 0;
+        instructors.forEach(instructor => {
+          if (instructor.module === cohort.module) {
+            teachers++;
+          }
+        });
+        let ratio = cohort.studentCount / teachers;
+        studentRatios[`cohort${cohort.cohort}`] = ratio;
+      });
+      return studentRatios;
+    };
+
+    const result = getStudentRatios(instructors, cohorts);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare 'studentRatios' variable with empty object as value
+    // iterate through cohorts array and for each cohort, 
+    // declare empty 'ratio' variable and 'teachers' variable assigned value of 0
+    // within iteration, iterate through instructors array and use conditional to 
+    // identify elements with this.module w/ value that equals cohorts.module (1 level up)
+    // assign value of ratio as this.studentCount / teachers
+    // assign studentRatios.[cohort' + '${this.cohort}] a value of ratio
+    // return studentRatios object
   },
 
   modulesPerTeacher() {
@@ -831,11 +902,36 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getInstructorMods = (instructors, cohorts) => {
+      let instructorMods = {};
+      instructors.forEach(instructor => {
+        instructorMods[instructor.name] = [];
+        instructor.teaches.forEach(skill => {
+          cohorts.forEach(cohort => {
+            if (cohort.curriculum.includes(skill) && !instructorMods[instructor.name].includes(cohort.module)) {
+              instructorMods[instructor.name].push(cohort.module);
+              instructorMods[instructor.name] = instructorMods[instructor.name].sort((a,b) => {
+                return a-b;
+              });
+            }
+          });
+        });
+      });
+      return instructorMods;
+    };
+
+
+    const result = getInstructorMods(instructors, cohorts);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare instructorMods variable with empty object as value
+    // iterate through instructors array and for each instructor, add instructorMods
+    // key-value pair with [instructor.name] as the key, empty array as value
+    // inside of that iteration, iterate through instructor.teaches array and...
+    // for each 'skill' in that array, iterate through cohorts array and if 
+    // cohort.curriculum.includes(skill), instructorMods[instructor.name].push(cohort.module)
+    // return instructorMods object
   },
 
   curriculumPerTeacher() {
@@ -848,11 +944,37 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getCurriculumTeachers = (instructors, cohorts) => {
+      let skills = {};
+      cohorts.forEach(cohort => {
+        cohort.curriculum.forEach(skill => {
+          if (!skills[skill]) {
+            skills[skill] = [];
+          }
+        });
+      });
+      instructors.forEach(instructor => {
+        instructor.teaches.forEach(skill => {
+          if (!skills[skill].includes(instructor.name)) {
+            skills[skill].push(instructor.name);
+          }
+        });
+      });
+      return skills;
+    };
+
+    const result = getCurriculumTeachers(instructors, cohorts);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare new skills variable with an assigned value of an empty object
+    // iterated through cohorts array and for each cohort, iterate through curriculum array
+    // for each curriculum element, if !skills[elem], skills[elem] = [];
+    // next, iterate through instructors array, and for each instructor iterate through
+    // their teaches array and execute a conditional:
+    // if !skills[elem].includes(instructor.name), skills[elem].push(instructor.name)
+    // may have to sort skills arrays to get elements in certain order
+    // return skills
   }
 };
 
