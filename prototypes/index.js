@@ -96,7 +96,22 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let retrieveMemberObjects = clubs => {
+      let members = {};
+      clubs.forEach(club => {
+        club.members.forEach(member => {
+          if (!members[member]) {
+            members[member] = [];
+            members[member].push(club.club);
+          } else {
+            members[member].push(club.club);
+          }
+        });
+      });
+      return members;
+    };
+
+    const result = retrieveMemberObjects(clubs);
     return result;
 
     // Annotation:
@@ -132,7 +147,20 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let retrieveModObjects = mods => {
+      let objects = [];
+      mods.forEach(modName => {
+        let ratio = modName.students / modName.instructors;
+        objects.push({
+          mod: modName.mod,
+          studentsPerInstructor: ratio,
+        });
+      });
+
+      return objects;
+    };
+
+    const result = retrieveModObjects(mods);
     return result;
 
     // Annotation:
