@@ -514,7 +514,15 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getAvgTemps = weather => {
+      let temps = [];
+      weather.forEach(entry => {
+        temps.push((entry.temperature.high + entry.temperature.low)/2);
+      });
+      return temps;
+    };
+
+    const result = getAvgTemps(weather);
     return result;
 
     // Annotation:
@@ -528,11 +536,23 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getSunnyCities = cities => {
+      let sunnyCities = [];
+      cities.forEach(city => {
+        if (city.type === 'sunny' || city.type === 'mostly sunny') {
+          sunnyCities.push(`${city.location} is ${city.type}.`);
+        }
+      });
+      return sunnyCities;
+    };
+
+    const result = getSunnyCities(weather);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through weather array and access each entry
+    // add conditional to check if entry's 'type' is 'sunny' or 'mostly sunny'
+    // if true, push string into 'sunnyCities' array using interpolated 'location' and 'type'
   },
 
   findHighestHumidity() {
@@ -543,12 +563,21 @@ const weatherPrompts = {
     //   humidity: 84,
     //   temperature: { high: 49, low: 38 }
     // }
+    
+    let getHighestHumidity = weather => {
+      let humidities = weather.map(city => city.humidity);
+      let highestHumidity = Math.max(...humidities);
+      let highestHumidityCity = weather.find(city => 
+        city.humidity === highestHumidity);
+      return highestHumidityCity;
+    };
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = getHighestHumidity(weather);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // iterate through weather array and use Math.max to identify element
+    // with highest entry.humidity value and return
 
   }
 };
@@ -571,7 +600,22 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getVisitList = parks => {
+      let visitList = {
+        parksVisited: [],
+        parksToVisit: [],
+      };
+      parks.forEach(park => {
+        if (park.visited) {
+          visitList.parksVisited.push(park.name);
+        } else {
+          visitList.parksToVisit.push(park.name);
+        }
+      });
+      return visitList;
+    };
+
+    const result = getVisitList(nationalParks);
     return result;
 
     // Annotation:
@@ -587,12 +631,27 @@ const nationalParksPrompts = {
     // { Utah: 'Zion' },
     // { Florida: 'Everglades' } ]
 
+    let getKeyValuePairs = parks => {
+      let keyValuePairs = [];
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+      parks.forEach(park => {
+        let pair = {
+          [park.location]: park.name,
+        };
+        keyValuePairs.push(pair);
+      });
+
+      return keyValuePairs;
+    };
+
+
+    const result = getKeyValuePairs(nationalParks);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // create empty keyValuePairs array
+    // iterate through parks array and for each item, push into keyValuePairs
+    // array and object with interpolated location and name keys and values
   },
 
   getParkActivities() {
@@ -611,11 +670,33 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getActivities = parks => {
+      let allActivities = [];
+      parks.forEach(park => {
+        park.activities.map(activity => {
+          allActivities.push(activity);
+        });
+      });
+      let uniqueActivities = [];
+      allActivities.forEach(activity => {
+        if (!uniqueActivities.includes(activity)) {
+          uniqueActivities.push(activity);
+        }
+      });
+      return uniqueActivities;
+    };
+
+    const result = getActivities(nationalParks);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare uniqueActivities variable with empty string as value
+    // iterate through nat'lParks array and for each to allActivities variable
+    // inside of that function, iterate through activities array 
+    // and return each element
+    // iterate through allActivities array and execute conditional: 
+    // if uniqueActivities array doesn't already include that allActivities
+    // element, push it into uniqueActivities
   }
 };
 
