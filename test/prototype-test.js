@@ -621,7 +621,7 @@ describe("PROTOTYPES", () => {
       expect(e).to.deep.equal(113)
     });
     
-    it.only("charactersByTotal", () => {
+    it("charactersByTotal", () => {
       const e = ultimaPrompts.charactersByTotal();
 
       expect(e).to.deep.equal([{
@@ -661,7 +661,7 @@ describe("PROTOTYPES", () => {
       })
     });
     
-    it("averageAgePerMovie", () => {
+    it.only("averageAgePerMovie", () => {
       const e = dinosaurPrompts.averageAgePerMovie();
 
       expect(e).to.deep.equal({

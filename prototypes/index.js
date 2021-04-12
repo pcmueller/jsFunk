@@ -1281,11 +1281,48 @@ const dinosaurPrompts = {
     //   'Jurassic World: Fallen Kingdom': 18
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getAwesomeDinos = (dinosaurs, movies) => {
+      let awesomeDinoMovies = {};
+      let dinosaursArray = [];
+      let dinoKeys = Object.keys(dinosaurs);
+      let dinoValues = Object.values(dinosaurs);
+      dinoKeys.forEach(key => {
+        let index = dinoKeys.indexOf(key);
+        dinosaursArray.push({ 
+          name: key, 
+          carnivore: dinoValues[index].carnivore, 
+          herbivore: dinoValues[index].herbivore,
+          isAwesome: dinoValues[index].isAwesome,
+        });
+      });
+
+      movies.forEach(movie => {
+        awesomeDinoMovies[movie.title] = 0;
+        movie.dinos.forEach(dino => {
+          dinosaursArray.forEach(dinosaur => {
+            if (dinosaur.name === dino && dinosaur.isAwesome) {
+              awesomeDinoMovies[movie.title]++;
+            }
+          });
+        });
+      });
+      return awesomeDinoMovies;
+    };
+
+    const result = getAwesomeDinos(dinosaurs, movies);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare awesomeDinoMovies variable with value of empty object
+    // iterate through movies array and for each movie, access title
+    // then push { [movie.title]: 0} into awesomeDinoMovies array
+    // then, still within function, iterate through movie.dinos array and 
+    // for each dino, iterate through dinosaurs array (<-- MAKE THIS) and 
+    // excecute conditional:
+    // if dino (movie.dinos.dino ) === dinosaur (dinoArray.this) AND
+    // dinoArray.this.isAwesome === true, then: 
+    // increment awesomeDinoMovies[movie] by 1
+    // return awesomeDinoMovies object
   },
 
   averageAgePerMovie() {
