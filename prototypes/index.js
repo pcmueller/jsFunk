@@ -1005,11 +1005,42 @@ const bossPrompts = {
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getLoyaltyStats = (bosses, sidekicks) => {
+      let loyaltyStats = [];
+      let bossKeys= Object.keys(bosses);
+      let bossNames = [];
+      bossKeys.forEach(key => {
+        bossNames.push(bosses[key].name);
+      });
+
+      bossNames.forEach(name => {
+        loyaltyStats.push({ bossName: name, sidekickLoyalty: 0 });
+      });
+
+      sidekicks.forEach(sidekick => {
+        loyaltyStats.forEach(boss => {
+          if (boss.bossName === sidekick.boss) {
+            boss.sidekickLoyalty += sidekick.loyaltyToBoss;
+          }
+        });
+      });
+      return loyaltyStats;
+    };
+
+    const result = getLoyaltyStats(bosses,sidekicks);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare a loyaltyStats variable with an empty array as value
+    // declare a bossNames array with a value of Object.keys(bosses)
+    // iterate throug bossNames array and for each name, loyaltyStats.push
+    // an object literal with: bossName: boss, sidekickLoyalty: 0
+    // next, iterate through sidekicks array and for each sidekick, 
+    // iterate through loyaltyStats array and use conditional to check 
+    // if stat.bossName === sidekick.boss
+    // when true, access stat.sidekickLoyalty and increment 
+    // by sidekick.loyaltyToBoss
+    // return loyaltyStats array
   }
 };
 
