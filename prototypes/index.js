@@ -1197,7 +1197,23 @@ const ultimaPrompts = {
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getWeaponDamage = (characters, weapons) => {
+      let weaponDamage = 0;
+      let weaponKeys = Object.keys(weapons);
+      characters.forEach(character => {
+        character.weapons.forEach(weapon => {
+          weaponKeys.forEach(key => {
+            if (key === weapon) {
+              weaponDamage += weapons[key].damage;
+            }
+          });
+        });
+      });
+
+      return weaponDamage;
+    };
+
+    const result = getWeaponDamage(characters, weapons);
     return result;
 
     // Annotation:
@@ -1209,7 +1225,26 @@ const ultimaPrompts = {
     // Return the sum damage and total range for each character as an object.
     // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getCharacterStats = (characters, weapons) => {
+      let characterStats = [];
+      let weaponKeys = Object.keys(weapons);
+      characters.forEach(character => {
+        let weaponDamage = 0;
+        let weaponRange = 0;
+        character.weapons.forEach(weapon => {
+          weaponKeys.forEach(key => {
+            if (key === weapon) {
+              weaponDamage += weapons[key].damage;
+              weaponRange += weapons[key].range;
+            }
+          });
+        });
+        characterStats.push({ [character.name]: { damage: weaponDamage, range: weaponRange }});
+      });
+      return characterStats;
+    };
+
+    const result = getCharacterStats(characters, weapons);
     return result;
 
     // Annotation:

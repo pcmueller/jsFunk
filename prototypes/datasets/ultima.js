@@ -16,7 +16,6 @@ const characters = [
     profession: 'ranger',
     weapons: ['bow', 'magebane', 'whip'],
     home: 'Sosaria',
-
   },
   {
     name: 'Dupre',
