@@ -837,6 +837,7 @@ const turingPrompts = {
           }
         });
       });
+      
       return instructorObjects;
     };
 
@@ -1351,16 +1352,64 @@ const dinosaurPrompts = {
       }
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    let getDirectorObjects = (humans, movies) => {
+      let directorsObject = {};
+      let humanNames = Object.keys(humans);
+
+      movies.forEach(movie => {
+        let year = movie.yearReleased;
+        let actors = movie.cast;
+        let totalAge = 0;
+        let avgAge = 0;
+        
+        if (!directorsObject[movie.director]) {
+          directorsObject[movie.director] = {};
+        }
+
+        let directorNames = Object.keys(directorsObject);
+
+        
+        directorNames.forEach(director => {
+          movie.cast.forEach(actor => {
+            humanNames.forEach(name => {
+              if (name === actor) {
+                totalAge += (year - humans[name].yearBorn);
+                avgAge = Math.floor(totalAge / actors.length);
+              }
+            });
+            directorsObject[director] += {[movie.title]: avgAge};
+          });
+        });
+
+      });
+      return directorsObject;
+    };
+
+    const result = getDirectorObjects(humans, movies);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare empty 'directors array'
+    // declare 'humanNames' variable with Object.keys(humans) as value
+    // iterate through movies array and for each movie, push movie.director
+    // into directors array if it isn't already included, and push movie into 
+    // that director's movies object (directors.push({director: movie.director, movies: [{title: movie.title, cast: movie.cast, totalAge: 0, avgAge: 0}]) )
+    // if director is already in array, push movie and details into that directors object
+    // next we need to total up the ages of actors in each movie:
+    // iterate through directors array and inside of that, iterate through
+    // director.movies.  for each movie, iterate through cast within.
+    // for each actor, iterate through 'humanNames' array and for each name,
+    // execute conditional: if humans[name] === actor, then movie.totalAge += (2021/humans[name].yearBorn)
+    // then, movie.avgAge += movie.totalAge / movie.cast.length
+    // once iteration is complete, we have all our needed data in array, just
+    // need to convert into object literal comprised of individual director objects
   },
 
   uncastActors() {
     /*
-    Return an array of objects that contain the names of humans who have not been cast in a Jurassic Park movie (yet), their nationality, and their imdbStarMeterRating. The object in the array should be sorted alphabetically by nationality.
+    Return an array of objects that contain the names of humans who have not been cast 
+    in a Jurassic Park movie (yet), their nationality, and their imdbStarMeterRating. 
+    The object in the array should be sorted alphabetically by nationality.
 
     e.g.
       [{
@@ -1384,11 +1433,49 @@ const dinosaurPrompts = {
       }]
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const getHumansNotCast = (humans, movies) => {
+      let humansInCast = [];
+      let humansNotCast = [];
+      let humanNames = Object.keys(humans);
+
+      humanNames.forEach(name => {
+        movies.forEach(movie => {
+          movie.cast.forEach(actor => {
+            if (name === actor && !humansInCast.includes(actor)) {
+              humansInCast.push(actor);
+            }
+          });
+        });
+      });
+
+      humanNames.forEach(name => {
+        if (!humansInCast.includes(name)) {
+          humansNotCast.push(
+            {
+              name: name,
+              nationality: humans[name].nationality,
+              imdbStarMeterRating: humans[name].imdbStarMeterRating,
+            });
+        }
+      });
+
+      humansNotCast.sort((a, b) => {
+        return a.nationality.localeCompare(b.nationality);
+      });
+
+      return humansNotCast;
+    };
+
+    const result = getHumansNotCast(humans, movies);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // declare humansInCast = [];
+    // assign all humans keys to array humanNames
+    // iterate through humanNames, for each humanName, 
+    // iterate through movies, for each movie, iterate through
+    // it's cast.  if cast.elem === humanName
+    // push into humansInCast
   },
 
   actorsAgesInMovies() {

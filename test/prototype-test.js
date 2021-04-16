@@ -661,7 +661,7 @@ describe("PROTOTYPES", () => {
       })
     });
     
-    it.only("averageAgePerMovie", () => {
+    it("averageAgePerMovie", () => {
       const e = dinosaurPrompts.averageAgePerMovie();
 
       expect(e).to.deep.equal({
@@ -681,7 +681,7 @@ describe("PROTOTYPES", () => {
       })
     });
     
-    it("uncastActors", () => {
+    it.only("uncastActors", () => {
       const e = dinosaurPrompts.uncastActors();
 
       expect(e).to.deep.equal([{
