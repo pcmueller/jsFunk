@@ -21,12 +21,13 @@ Check out [this video](https://youtu.be/-TTzFwsZX1c) for a walkthrough of how to
 - filter
 - reduce
 - map
-- sort
 - includes
 - split 
 - join
 
 Object.keys() will **not** be needed for your midmod or final assessments.
+sort() will **not** be needed for your midmod or final assessments.
+
 
 ## Instructions
 
