@@ -1,8 +1,0 @@
-# pack-refs with: peeled fully-peeled sorted 
-aad47a22a74de3722f3a13f1d50073234fad8c11 refs/heads/main
-3e9910daa73f5776479cb685ad89d06fd5bb06c6 refs/heads/new-prompts
-611aa89a6a898858c3d812e30cee8f089042be70 refs/heads/np-prompts
-136cdcedbe6c29378e23595af9282178c73663e0 refs/heads/original-jsFun
-a892def999634487870381704807829908d13bc1 refs/heads/tests
-23e4e01610d959f30141b992d64e7a4cee7f370c refs/heads/update-test-readability
-fbf97086f2960659a5dbcd9913047ce985f877be refs/heads/update-trial
