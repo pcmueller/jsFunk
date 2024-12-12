@@ -1,8 +1,8 @@
-const { boardGames } = require('../datasets/boardGames');
+const { boardGames } = require("../datasets/boardGames");
 
 // To run the code you've written in this file, use node prototypes/problem-sets/boardGames.js
 
-console.log('Running boardGames.js')
+console.log("Running boardGames.js");
 
 /* Board Games Prompts*/
 
@@ -28,6 +28,19 @@ Annotate:
   After you find a solution, write out the steps of that solution.  Break them down as much as possible. 
 */
 
+const listGames = (gameType) => {
+  const gameNames = boardGames[gameType].map((game) => {
+    return game.name;
+  });
+
+  return gameNames;
+};
+
+// listGames("strategy");
+
+console.log(listGames("strategy"));
+// console.log(listGames("childrens"));
+// console.log(listGames("party"));
 
 /*
 Level 2
@@ -51,7 +64,6 @@ Annotation:
   After you find a solution, write out the steps of that solution.  Break them down as much as possible. 
 */
 
-
 /*
 Level 3
 
@@ -74,8 +86,6 @@ Annotation:
   After you find a solution, write out the steps of that solution.  Break them down as much as possible. 
 */
 
-
-
 /*
 Level 4
 
@@ -97,7 +107,7 @@ e.g.
 Annotation:
   After you find a solution, write out the steps of that solution.  Break them down as much as possible. 
 */
-  
+
 /*
 Level 5
 
@@ -111,8 +121,6 @@ Annotation:
   If your tests did not immediately pass, take notes on what details you missed while building and checking your solutions. 
   Take notes on the error messages that led you to fixing those details. 
 */
-
-
 
 // module.exports = {
 //   listGames,
