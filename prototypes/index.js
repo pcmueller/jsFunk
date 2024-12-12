@@ -1,22 +1,17 @@
-const { kitties } = require('./datasets/kitties');
-const { clubs } = require('./datasets/clubs');
-const { mods } = require('./datasets/mods');
-const { cakes } = require('./datasets/cakes');
-const { classrooms } = require('./datasets/classrooms');
-const { breweries } = require('./datasets/breweries');
-const { nationalParks } = require('./datasets/nationalParks');
-const { books } = require('./datasets/books');
-const { weather } = require('./datasets/weather');
-const { instructors, cohorts } = require('./datasets/turing');
-const { bosses, sidekicks } = require('./datasets/bosses');
-const { constellations, stars } = require('./datasets/astronomy');
-const { weapons, characters } = require('./datasets/ultima');
-const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
-
-
-
-
-
+const { kitties } = require("./datasets/kitties");
+const { clubs } = require("./datasets/clubs");
+const { mods } = require("./datasets/mods");
+const { cakes } = require("./datasets/cakes");
+const { classrooms } = require("./datasets/classrooms");
+const { breweries } = require("./datasets/breweries");
+const { nationalParks } = require("./datasets/nationalParks");
+const { books } = require("./datasets/books");
+const { weather } = require("./datasets/weather");
+const { instructors, cohorts } = require("./datasets/turing");
+const { bosses, sidekicks } = require("./datasets/bosses");
+const { constellations, stars } = require("./datasets/astronomy");
+const { weapons, characters } = require("./datasets/ultima");
+const { dinosaurs, humans, movies } = require("./datasets/dinosaurs");
 
 // SINGLE DATASETS
 // =================================================================
@@ -24,12 +19,11 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
   orangeKittyNames() {
-
     // Return an array of just the names of kitties who are orange e.g.
     // ['Tiger', 'Snickers']
-    let orangeKitties = kitties.filter(kitty => kitty.color === 'orange');
+    let orangeKitties = kitties.filter((kitty) => kitty.color === "orange");
 
-    const result = orangeKitties.map(orangeKitty => orangeKitty.name);
+    const result = orangeKitties.map((orangeKitty) => orangeKitty.name);
     return result;
 
     // Annotation:
@@ -54,7 +48,7 @@ const kittyPrompts = {
     // Return an array of kitties who have all grown up by 2 years
 
     // let grownAssKitties = kitties.map(kitty => kitty.age += 2);
-    kitties.forEach(kitty => kitty.age += 2);
+    kitties.forEach((kitty) => (kitty.age += 2));
     let grownAssKitties = kitties.sort((a, b) => {
       return b.age - a.age;
     });
@@ -66,24 +60,14 @@ const kittyPrompts = {
     // Annotation:
     // use map() to access each kitty.age and increment by 2
     // use sort() to order kitties by age from b - a
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
@@ -96,10 +80,10 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    let retrieveMemberObjects = clubs => {
+    let retrieveMemberObjects = (clubs) => {
       let members = {};
-      clubs.forEach(club => {
-        club.members.forEach(member => {
+      clubs.forEach((club) => {
+        club.members.forEach((member) => {
           if (!members[member]) {
             members[member] = [];
             members[member].push(club.club);
@@ -116,24 +100,14 @@ const clubPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: mods from ./datasets/mods
 const modPrompts = {
@@ -147,9 +121,9 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    let retrieveModObjects = mods => {
+    let retrieveModObjects = (mods) => {
       let objects = [];
-      mods.forEach(modName => {
+      mods.forEach((modName) => {
         let ratio = modName.students / modName.instructors;
         objects.push({
           mod: modName.mod,
@@ -165,24 +139,14 @@ const modPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
@@ -198,10 +162,10 @@ const cakePrompts = {
   //     cakeStock.push(finalOutput);
   //     return cakeStock;
   //   }, cakeStock);
-    
+
   stockPerCake() {
     let cakeStock = [];
-    cakes.forEach(cake => {
+    cakes.forEach((cake) => {
       let cakeObj = {
         flavor: cake.cakeFlavor,
         inStock: cake.inStock,
@@ -226,7 +190,7 @@ const cakePrompts = {
   },
 
   onlyInStock() {
-    let stockedCakes = cakes.filter(cake => cake.inStock);
+    let stockedCakes = cakes.filter((cake) => cake.inStock);
 
     // Return an array of only the cakes that are in stock
     // e.g.
@@ -276,17 +240,16 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    
-    let retrieveUniqueToppings = cakes => {
+    let retrieveUniqueToppings = (cakes) => {
       let allToppings = [];
       let uniqueToppings = [];
 
-      cakes.forEach(cake => {
-        cake.toppings.forEach(topping => {
+      cakes.forEach((cake) => {
+        cake.toppings.forEach((topping) => {
           allToppings.push(topping);
         });
       });
-      allToppings.forEach(topping => {
+      allToppings.forEach((topping) => {
         if (!uniqueToppings.includes(topping)) {
           uniqueToppings.push(topping);
         }
@@ -299,7 +262,7 @@ const cakePrompts = {
 
     // Annotation:
     // iterate through cakes array and map cakes.toppings array elements into new array
-    // iterate through toppings array and push into new "noDuplicates" array 
+    // iterate through toppings array and push into new "noDuplicates" array
     // any elements that aren't already included
   },
 
@@ -314,17 +277,16 @@ const cakePrompts = {
     //    ...etc
     // }
 
-
-    let retrieveGroceryList = cakes => {
+    let retrieveGroceryList = (cakes) => {
       let allToppings = [];
       let uniqueToppings = {};
 
-      cakes.forEach(cake => {
-        cake.toppings.forEach(topping => {
+      cakes.forEach((cake) => {
+        cake.toppings.forEach((topping) => {
           allToppings.push(topping);
         });
       });
-      allToppings.forEach(topping => {
+      allToppings.forEach((topping) => {
         if (!uniqueToppings[topping]) {
           uniqueToppings[topping] = 1;
         } else {
@@ -338,25 +300,15 @@ const cakePrompts = {
     return result;
 
     // Annotation:
-    // use retrieve all toppings and store in array with 
-  }
+    // use retrieve all toppings and store in array with
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: classrooms from ./datasets/classrooms
 const classPrompts = {
@@ -369,10 +321,10 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    let retrieveFEClassrooms = classrooms => {
+    let retrieveFEClassrooms = (classrooms) => {
       let feClassrooms = [];
-      classrooms.forEach(classroom => {
-        if (classroom.program === 'FE') {
+      classrooms.forEach((classroom) => {
+        if (classroom.program === "FE") {
           feClassrooms.push(classroom);
         }
       });
@@ -394,15 +346,15 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    let accumulateCapacities = classrooms => {
+    let accumulateCapacities = (classrooms) => {
       let capacities = {
         feCapacity: 0,
         beCapacity: 0,
       };
-      classrooms.forEach(room => {
-        if (room.program === 'FE') {
+      classrooms.forEach((room) => {
+        if (room.program === "FE") {
           capacities.feCapacity += room.capacity;
-        } else if (room.program === 'BE') {
+        } else if (room.program === "BE") {
           capacities.beCapacity += room.capacity;
         }
       });
@@ -418,7 +370,7 @@ const classPrompts = {
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
-    let sortedClassrooms = classrooms => {
+    let sortedClassrooms = (classrooms) => {
       let sortedRooms = classrooms.sort((a, b) => {
         return a.capacity - b.capacity;
       });
@@ -430,7 +382,7 @@ const classPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -451,10 +403,10 @@ const bookPrompts = {
     //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
     //   'Catch-22', 'Treasure Island']
 
-    let returnNonViolentBooks = books => {
+    let returnNonViolentBooks = (books) => {
       let nonViolentBooks = [];
-      books.forEach(book => {
-        if (book.genre !== 'Horror' && book.genre !== 'True Crime') {
+      books.forEach((book) => {
+        if (book.genre !== "Horror" && book.genre !== "True Crime") {
           nonViolentBooks.push(book.title);
         }
       });
@@ -466,7 +418,6 @@ const bookPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-
   },
   getNewBooks() {
     // return an array of objects containing all books that were
@@ -476,16 +427,14 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    let getNewerBooks = books => {
+    let getNewerBooks = (books) => {
       let newBooks = [];
-      books.forEach(book => {
+      books.forEach((book) => {
         if (book.published >= 1990 && book.published <= 2009) {
-          newBooks.push(
-            {
-              title: book.title,
-              year: book.published,
-            }
-          );
+          newBooks.push({
+            title: book.title,
+            year: book.published,
+          });
         }
       });
       return newBooks;
@@ -496,10 +445,8 @@ const bookPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-  }
-
+  },
 };
-
 
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
@@ -514,10 +461,10 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    let getAvgTemps = weather => {
+    let getAvgTemps = (weather) => {
       let temps = [];
-      weather.forEach(entry => {
-        temps.push((entry.temperature.high + entry.temperature.low)/2);
+      weather.forEach((entry) => {
+        temps.push((entry.temperature.high + entry.temperature.low) / 2);
       });
       return temps;
     };
@@ -536,10 +483,10 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    let getSunnyCities = cities => {
+    let getSunnyCities = (cities) => {
       let sunnyCities = [];
-      cities.forEach(city => {
-        if (city.type === 'sunny' || city.type === 'mostly sunny') {
+      cities.forEach((city) => {
+        if (city.type === "sunny" || city.type === "mostly sunny") {
           sunnyCities.push(`${city.location} is ${city.type}.`);
         }
       });
@@ -563,12 +510,13 @@ const weatherPrompts = {
     //   humidity: 84,
     //   temperature: { high: 49, low: 38 }
     // }
-    
-    let getHighestHumidity = weather => {
-      let humidities = weather.map(city => city.humidity);
+
+    let getHighestHumidity = (weather) => {
+      let humidities = weather.map((city) => city.humidity);
       let highestHumidity = Math.max(...humidities);
-      let highestHumidityCity = weather.find(city => 
-        city.humidity === highestHumidity);
+      let highestHumidityCity = weather.find(
+        (city) => city.humidity === highestHumidity
+      );
       return highestHumidityCity;
     };
 
@@ -578,8 +526,7 @@ const weatherPrompts = {
     // Annotation:
     // iterate through weather array and use Math.max to identify element
     // with highest entry.humidity value and return
-
-  }
+  },
 };
 
 // ---------------------------------------------------------------------------
@@ -587,7 +534,6 @@ const weatherPrompts = {
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
 
 // DATASET: nationalParks from ./datasets/nationalParks
 
@@ -600,12 +546,12 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    let getVisitList = parks => {
+    let getVisitList = (parks) => {
       let visitList = {
         parksVisited: [],
         parksToVisit: [],
       };
-      parks.forEach(park => {
+      parks.forEach((park) => {
         if (park.visited) {
           visitList.parksVisited.push(park.name);
         } else {
@@ -631,10 +577,10 @@ const nationalParksPrompts = {
     // { Utah: 'Zion' },
     // { Florida: 'Everglades' } ]
 
-    let getKeyValuePairs = parks => {
+    let getKeyValuePairs = (parks) => {
       let keyValuePairs = [];
 
-      parks.forEach(park => {
+      parks.forEach((park) => {
         let pair = {
           [park.location]: park.name,
         };
@@ -643,7 +589,6 @@ const nationalParksPrompts = {
 
       return keyValuePairs;
     };
-
 
     const result = getKeyValuePairs(nationalParks);
     return result;
@@ -670,15 +615,15 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    let getActivities = parks => {
+    let getActivities = (parks) => {
       let allActivities = [];
-      parks.forEach(park => {
-        park.activities.map(activity => {
+      parks.forEach((park) => {
+        park.activities.map((activity) => {
           allActivities.push(activity);
         });
       });
       let uniqueActivities = [];
-      allActivities.forEach(activity => {
+      allActivities.forEach((activity) => {
         if (!uniqueActivities.includes(activity)) {
           uniqueActivities.push(activity);
         }
@@ -692,26 +637,19 @@ const nationalParksPrompts = {
     // Annotation:
     // declare uniqueActivities variable with empty string as value
     // iterate through nat'lParks array and for each to allActivities variable
-    // inside of that function, iterate through activities array 
+    // inside of that function, iterate through activities array
     // and return each element
-    // iterate through allActivities array and execute conditional: 
+    // iterate through allActivities array and execute conditional:
     // if uniqueActivities array doesn't already include that allActivities
     // element, push it into uniqueActivities
-  }
+  },
 };
 
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
@@ -719,8 +657,8 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    let getTotalBeers = breweries => {
-      let totalBeers = breweries.reduce((total, brewery) => {    
+    let getTotalBeers = (breweries) => {
+      let totalBeers = breweries.reduce((total, brewery) => {
         return total + brewery.beers.length;
       }, 0);
       return totalBeers;
@@ -743,10 +681,13 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    let getBeerCounts = breweries => {
+    let getBeerCounts = (breweries) => {
       let beerCounts = [];
-      breweries.forEach(brewery => {    
-        beerCounts.push({name: brewery.name, beerCount: brewery.beers.length});
+      breweries.forEach((brewery) => {
+        beerCounts.push({
+          name: brewery.name,
+          beerCount: brewery.beers.length,
+        });
       });
       return beerCounts;
     };
@@ -763,10 +704,10 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    let getHighestAbvBeer = breweries => {
+    let getHighestAbvBeer = (breweries) => {
       let allBeers = [];
-      breweries.forEach(brewery => {
-        brewery.beers.forEach(beer => {
+      breweries.forEach((brewery) => {
+        brewery.beers.forEach((beer) => {
           allBeers.push(beer);
         });
       });
@@ -774,7 +715,7 @@ const breweryPrompts = {
         return b.abv - a.abv;
       });
 
-      let [ highestAbvBeer ] = sortedBeers;
+      let [highestAbvBeer] = sortedBeers;
       return highestAbvBeer;
     };
 
@@ -784,35 +725,20 @@ const breweryPrompts = {
     // Annotation:
     // use sort() to order beers from b.abv - a.abv and store in new array
     // use destructuring to access first item in array and return
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DOUBLE DATASETS
 // =================================================================
@@ -829,15 +755,18 @@ const turingPrompts = {
 
     let getInstructorStudentCounts = (instructors, cohorts) => {
       let instructorObjects = [];
-      instructors.forEach(instructor => {
-        cohorts.forEach(cohort => {
+      instructors.forEach((instructor) => {
+        cohorts.forEach((cohort) => {
           if (cohort.module === instructor.module) {
-            let object = { name: instructor.name, studentCount: cohort.studentCount };
+            let object = {
+              name: instructor.name,
+              studentCount: cohort.studentCount,
+            };
             instructorObjects.push(object);
           }
         });
       });
-      
+
       return instructorObjects;
     };
 
@@ -861,9 +790,9 @@ const turingPrompts = {
 
     let getStudentRatios = (instructors, cohorts) => {
       let studentRatios = {};
-      cohorts.forEach(cohort => {
+      cohorts.forEach((cohort) => {
         let teachers = 0;
-        instructors.forEach(instructor => {
+        instructors.forEach((instructor) => {
           if (instructor.module === cohort.module) {
             teachers++;
           }
@@ -879,9 +808,9 @@ const turingPrompts = {
 
     // Annotation:
     // declare 'studentRatios' variable with empty object as value
-    // iterate through cohorts array and for each cohort, 
+    // iterate through cohorts array and for each cohort,
     // declare empty 'ratio' variable and 'teachers' variable assigned value of 0
-    // within iteration, iterate through instructors array and use conditional to 
+    // within iteration, iterate through instructors array and use conditional to
     // identify elements with this.module w/ value that equals cohorts.module (1 level up)
     // assign value of ratio as this.studentCount / teachers
     // assign studentRatios.[cohort' + '${this.cohort}] a value of ratio
@@ -905,14 +834,19 @@ const turingPrompts = {
 
     let getInstructorMods = (instructors, cohorts) => {
       let instructorMods = {};
-      instructors.forEach(instructor => {
+      instructors.forEach((instructor) => {
         instructorMods[instructor.name] = [];
-        instructor.teaches.forEach(skill => {
-          cohorts.forEach(cohort => {
-            if (cohort.curriculum.includes(skill) && !instructorMods[instructor.name].includes(cohort.module)) {
+        instructor.teaches.forEach((skill) => {
+          cohorts.forEach((cohort) => {
+            if (
+              cohort.curriculum.includes(skill) &&
+              !instructorMods[instructor.name].includes(cohort.module)
+            ) {
               instructorMods[instructor.name].push(cohort.module);
-              instructorMods[instructor.name] = instructorMods[instructor.name].sort((a,b) => {
-                return a-b;
+              instructorMods[instructor.name] = instructorMods[
+                instructor.name
+              ].sort((a, b) => {
+                return a - b;
               });
             }
           });
@@ -920,7 +854,6 @@ const turingPrompts = {
       });
       return instructorMods;
     };
-
 
     const result = getInstructorMods(instructors, cohorts);
     return result;
@@ -930,7 +863,7 @@ const turingPrompts = {
     // iterate through instructors array and for each instructor, add instructorMods
     // key-value pair with [instructor.name] as the key, empty array as value
     // inside of that iteration, iterate through instructor.teaches array and...
-    // for each 'skill' in that array, iterate through cohorts array and if 
+    // for each 'skill' in that array, iterate through cohorts array and if
     // cohort.curriculum.includes(skill), instructorMods[instructor.name].push(cohort.module)
     // return instructorMods object
   },
@@ -947,15 +880,15 @@ const turingPrompts = {
 
     let getCurriculumTeachers = (instructors, cohorts) => {
       let skills = {};
-      cohorts.forEach(cohort => {
-        cohort.curriculum.forEach(skill => {
+      cohorts.forEach((cohort) => {
+        cohort.curriculum.forEach((skill) => {
           if (!skills[skill]) {
             skills[skill] = [];
           }
         });
       });
-      instructors.forEach(instructor => {
-        instructor.teaches.forEach(skill => {
+      instructors.forEach((instructor) => {
+        instructor.teaches.forEach((skill) => {
           if (!skills[skill].includes(instructor.name)) {
             skills[skill].push(instructor.name);
           }
@@ -976,24 +909,14 @@ const turingPrompts = {
     // if !skills[elem].includes(instructor.name), skills[elem].push(instructor.name)
     // may have to sort skills arrays to get elements in certain order
     // return skills
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
@@ -1006,29 +929,27 @@ const bossPrompts = {
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
     // ]
 
-    let getLoyaltyStats = (bosses, sidekicks) => {
-      let loyaltyStats = [];
-      let bossKeys= Object.keys(bosses);
-      let bossNames = [];
-      bossKeys.forEach(key => {
-        bossNames.push(bosses[key].name);
-      });
+    const getLoyaltyStats = (bosses, sidekicks) => {
+      const bossKeys = Object.keys(bosses);
 
-      bossNames.forEach(name => {
-        loyaltyStats.push({ bossName: name, sidekickLoyalty: 0 });
-      });
+      const array = bossKeys.reduce((acc, key) => {
+        acc.push({ bossName: bosses[key].name, sidekickLoyalty: 0 });
+        return acc;
+      }, []);
 
-      sidekicks.forEach(sidekick => {
-        loyaltyStats.forEach(boss => {
-          if (boss.bossName === sidekick.boss) {
-            boss.sidekickLoyalty += sidekick.loyaltyToBoss;
+      array.forEach((obj) => {
+        sidekicks.forEach((sidekick) => {
+          if (obj.bossName === sidekick.boss) {
+            obj.sidekickLoyalty += sidekick.loyaltyToBoss;
           }
         });
       });
-      return loyaltyStats;
+
+      return array;
     };
 
-    const result = getLoyaltyStats(bosses,sidekicks);
+    const result = getLoyaltyStats(bosses, sidekicks);
+    // console.log(result);
     return result;
 
     // Annotation:
@@ -1036,30 +957,20 @@ const bossPrompts = {
     // declare a bossNames array with a value of Object.keys(bosses)
     // iterate throug bossNames array and for each name, loyaltyStats.push
     // an object literal with: bossName: boss, sidekickLoyalty: 0
-    // next, iterate through sidekicks array and for each sidekick, 
-    // iterate through loyaltyStats array and use conditional to check 
+    // next, iterate through sidekicks array and for each sidekick,
+    // iterate through loyaltyStats array and use conditional to check
     // if stat.bossName === sidekick.boss
-    // when true, access stat.sidekickLoyalty and increment 
+    // when true, access stat.sidekickLoyalty and increment
     // by sidekick.loyaltyToBoss
     // return loyaltyStats array
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: constellations, stars } from ./datasets/astronomy
 const astronomyPrompts = {
@@ -1079,17 +990,16 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-
-    let retrieveStars = stars => {
+    let retrieveStars = (stars) => {
       let allStars = [];
       let constNames = Object.keys(constellations);
-      constNames.forEach(name => {
-        constellations[name].stars.forEach(star => {
+      constNames.forEach((name) => {
+        constellations[name].stars.forEach((star) => {
           allStars.push(star);
         });
       });
       let matchingStars = [];
-      stars.forEach(star => {
+      stars.forEach((star) => {
         if (allStars.includes(star.name)) {
           matchingStars.push(star);
         }
@@ -1115,18 +1025,18 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    let returnStarsByColor = stars => {
+    let returnStarsByColor = (stars) => {
       let allColors = [];
       let starsByColor = {};
-      stars.forEach(star => {
+      stars.forEach((star) => {
         allColors.push(star.color);
       });
-      allColors.forEach(color => {
+      allColors.forEach((color) => {
         if (!starsByColor[color]) {
           starsByColor[color] = [];
         }
       });
-      stars.forEach(star => {
+      stars.forEach((star) => {
         starsByColor[star.color].push(star);
       });
 
@@ -1154,13 +1064,13 @@ const astronomyPrompts = {
     //    "Orion",
     //    "The Little Dipper" ]
 
-    let retrieveConstellations = stars => {
+    let retrieveConstellations = (stars) => {
       let orderedStars = stars.sort((a, b) => {
         return a.visualMagnitude - b.visualMagnitude;
       });
       let constNames = [];
-      orderedStars.forEach(star => {
-        if (star.constellation !== '') {
+      orderedStars.forEach((star) => {
+        if (star.constellation !== "") {
           constNames.push(star.constellation);
         }
       });
@@ -1172,38 +1082,27 @@ const astronomyPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: charaters, weapons from ./datasets/ultima
 const ultimaPrompts = {
   totalDamage() {
-
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
 
     let getWeaponDamage = (characters, weapons) => {
       let weaponDamage = 0;
       let weaponKeys = Object.keys(weapons);
-      characters.forEach(character => {
-        character.weapons.forEach(weapon => {
-          weaponKeys.forEach(key => {
+      characters.forEach((character) => {
+        character.weapons.forEach((weapon) => {
+          weaponKeys.forEach((key) => {
             if (key === weapon) {
               weaponDamage += weapons[key].damage;
             }
@@ -1222,25 +1121,26 @@ const ultimaPrompts = {
   },
 
   charactersByTotal() {
-
     // Return the sum damage and total range for each character as an object.
     // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
 
     let getCharacterStats = (characters, weapons) => {
       let characterStats = [];
       let weaponKeys = Object.keys(weapons);
-      characters.forEach(character => {
+      characters.forEach((character) => {
         let weaponDamage = 0;
         let weaponRange = 0;
-        character.weapons.forEach(weapon => {
-          weaponKeys.forEach(key => {
+        character.weapons.forEach((weapon) => {
+          weaponKeys.forEach((key) => {
             if (key === weapon) {
               weaponDamage += weapons[key].damage;
               weaponRange += weapons[key].range;
             }
           });
         });
-        characterStats.push({ [character.name]: { damage: weaponDamage, range: weaponRange }});
+        characterStats.push({
+          [character.name]: { damage: weaponDamage, range: weaponRange },
+        });
       });
       return characterStats;
     };
@@ -1253,21 +1153,11 @@ const ultimaPrompts = {
   },
 };
 
-
-
-
-
-
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
 const dinosaurPrompts = {
@@ -1287,20 +1177,20 @@ const dinosaurPrompts = {
       let dinosaursArray = [];
       let dinoKeys = Object.keys(dinosaurs);
       let dinoValues = Object.values(dinosaurs);
-      dinoKeys.forEach(key => {
+      dinoKeys.forEach((key) => {
         let index = dinoKeys.indexOf(key);
-        dinosaursArray.push({ 
-          name: key, 
-          carnivore: dinoValues[index].carnivore, 
+        dinosaursArray.push({
+          name: key,
+          carnivore: dinoValues[index].carnivore,
           herbivore: dinoValues[index].herbivore,
           isAwesome: dinoValues[index].isAwesome,
         });
       });
 
-      movies.forEach(movie => {
+      movies.forEach((movie) => {
         awesomeDinoMovies[movie.title] = 0;
-        movie.dinos.forEach(dino => {
-          dinosaursArray.forEach(dinosaur => {
+        movie.dinos.forEach((dino) => {
+          dinosaursArray.forEach((dinosaur) => {
             if (dinosaur.name === dino && dinosaur.isAwesome) {
               awesomeDinoMovies[movie.title]++;
             }
@@ -1309,7 +1199,6 @@ const dinosaurPrompts = {
       });
       return awesomeDinoMovies;
     };
-
     const result = getAwesomeDinos(dinosaurs, movies);
     return result;
 
@@ -1317,11 +1206,11 @@ const dinosaurPrompts = {
     // declare awesomeDinoMovies variable with value of empty object
     // iterate through movies array and for each movie, access title
     // then push { [movie.title]: 0} into awesomeDinoMovies array
-    // then, still within function, iterate through movie.dinos array and 
-    // for each dino, iterate through dinosaurs array (<-- MAKE THIS) and 
+    // then, still within function, iterate through movie.dinos array and
+    // for each dino, iterate through dinosaurs array (<-- MAKE THIS) and
     // excecute conditional:
     // if dino (movie.dinos.dino ) === dinosaur (dinoArray.this) AND
-    // dinoArray.this.isAwesome === true, then: 
+    // dinoArray.this.isAwesome === true, then:
     // increment awesomeDinoMovies[movie] by 1
     // return awesomeDinoMovies object
   },
@@ -1354,34 +1243,23 @@ const dinosaurPrompts = {
 
     let getDirectorObjects = (humans, movies) => {
       let directorsObject = {};
-      let humanNames = Object.keys(humans);
 
-      movies.forEach(movie => {
-        let year = movie.yearReleased;
-        let actors = movie.cast;
+      movies.forEach((movie) => {
         let totalAge = 0;
-        let avgAge = 0;
-        
-        if (!directorsObject[movie.director]) {
-          directorsObject[movie.director] = {};
-        }
 
-        let directorNames = Object.keys(directorsObject);
-
-        
-        directorNames.forEach(director => {
-          movie.cast.forEach(actor => {
-            humanNames.forEach(name => {
-              if (name === actor) {
-                totalAge += (year - humans[name].yearBorn);
-                avgAge = Math.floor(totalAge / actors.length);
-              }
-            });
-            directorsObject[director] += {[movie.title]: avgAge};
-          });
+        movie.cast.forEach((actor) => {
+          totalAge += movie.yearReleased - humans[actor].yearBorn;
         });
 
+        let avgAge = parseInt(totalAge / movie.cast.length);
+
+        if (!directorsObject[movie.director]) {
+          directorsObject[movie.director] = { [movie.title]: avgAge };
+        } else {
+          directorsObject[movie.director][movie.title] = avgAge;
+        }
       });
+
       return directorsObject;
     };
 
@@ -1392,7 +1270,7 @@ const dinosaurPrompts = {
     // declare empty 'directors array'
     // declare 'humanNames' variable with Object.keys(humans) as value
     // iterate through movies array and for each movie, push movie.director
-    // into directors array if it isn't already included, and push movie into 
+    // into directors array if it isn't already included, and push movie into
     // that director's movies object (directors.push({director: movie.director, movies: [{title: movie.title, cast: movie.cast, totalAge: 0, avgAge: 0}]) )
     // if director is already in array, push movie and details into that directors object
     // next we need to total up the ages of actors in each movie:
@@ -1438,24 +1316,22 @@ const dinosaurPrompts = {
       let humansNotCast = [];
       let humanNames = Object.keys(humans);
 
-      humanNames.forEach(name => {
-        movies.forEach(movie => {
-          movie.cast.forEach(actor => {
+      humanNames.forEach((name) => {
+        movies.forEach((movie) => {
+          movie.cast.forEach((actor) => {
             if (name === actor && !humansInCast.includes(actor)) {
               humansInCast.push(actor);
             }
           });
         });
       });
-
-      humanNames.forEach(name => {
+      humanNames.forEach((name) => {
         if (!humansInCast.includes(name)) {
-          humansNotCast.push(
-            {
-              name: name,
-              nationality: humans[name].nationality,
-              imdbStarMeterRating: humans[name].imdbStarMeterRating,
-            });
+          humansNotCast.push({
+            name: name,
+            nationality: humans[name].nationality,
+            imdbStarMeterRating: humans[name].imdbStarMeterRating,
+          });
         }
       });
 
@@ -1472,7 +1348,7 @@ const dinosaurPrompts = {
     // Annotation:
     // declare humansInCast = [];
     // assign all humans keys to array humanNames
-    // iterate through humanNames, for each humanName, 
+    // iterate through humanNames, for each humanName,
     // iterate through movies, for each movie, iterate through
     // it's cast.  if cast.elem === humanName
     // push into humansInCast
@@ -1480,7 +1356,9 @@ const dinosaurPrompts = {
 
   actorsAgesInMovies() {
     /*
-    Return an array of objects for each human and the age(s) they were in the movie(s) they were cast in, as an array of age(s). Only include humans who were cast in at least one movie.
+    Return an array of objects for each human and the age(s) they 
+    were in the movie(s) they were cast in, as an array of age(s). 
+    Only include humans who were cast in at least one movie.
 
     e.g.
     [ { name: 'Sam Neill', ages: [ 46, 54 ] },
@@ -1494,12 +1372,46 @@ const dinosaurPrompts = {
       { name: 'Bryce Dallas Howard', ages: [ 34, 37 ] } ]
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const getActorAges = (movies, humans) => {
+      let actorNames = [];
+      let castActors = [];
+
+      movies.forEach((movie) => {
+        movie.cast.forEach((actor) => {
+          if (!actorNames.includes(actor)) {
+            actorNames.push(actor);
+          }
+        });
+      });
+
+      actorNames.forEach((actor) => {
+        castActors.push({ name: actor });
+      });
+
+      castActors.forEach((actor) => {
+        let movieAges = movies.reduce((agesArr, movie) => {
+          if (movie.cast.includes(actor.name)) {
+            agesArr.push(movie.yearReleased - humans[actor.name].yearBorn);
+          }
+          return agesArr;
+        }, []);
+        actor.ages = movieAges;
+      });
+      return castActors;
+    };
+
+    const result = getActorAges(movies, humans);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
-  }
+    // declare empty actorAges array
+    // iterate through movies array and for each movie, iterate through cast
+    // for each actor, if they are not already included in actorAges array,
+    // push in an object with name: actor, ages: []
+    // next, iterate through actorAges array, and for each actor,
+    // if humans[actor.name] exists, push into actor.ages
+    //
+  },
 };
 
 module.exports = {
@@ -1516,5 +1428,5 @@ module.exports = {
   nationalParksPrompts,
   weatherPrompts,
   bookPrompts,
-  dinosaurPrompts
+  dinosaurPrompts,
 };

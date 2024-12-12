@@ -12,11 +12,10 @@ const context = {
       }
     }
 
-    const ship = new SpaceProbe('voyager', 'classy');
-
+    const ship = new SpaceProbe("voyager", "classy");
 
     // What is the value of `this` when we call ship.fly()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -30,7 +29,7 @@ const context = {
     }
 
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -39,17 +38,17 @@ const context = {
 
   exerciseC() {
     const car = {
-      make: 'Tesla',
-      getInfo: function(){
+      make: "Tesla",
+      getInfo: function () {
         console.log(this);
-      }
+      },
     };
 
-    const el = document.getElementById('btn');
-    el.addEventListener('click', car.getInfo);
+    const el = document.getElementById("btn");
+    el.addEventListener("click", car.getInfo);
 
     // What is the value of `this` when a user clicks on our element and car.getInfo() is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -58,21 +57,20 @@ const context = {
 
   exerciseD() {
     const dog = {
-      breed: 'Chihuahua',
-      getBreed: function(){
-
-        const innerFunction = function() {
+      breed: "Chihuahua",
+      getBreed: function () {
+        const innerFunction = function () {
           console.log(this.breed);
         };
 
         return innerFunction;
-      }
+      },
     };
 
     var breed = dog.getBreed();
 
     // What is the value of `this` when we call breed()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -80,15 +78,13 @@ const context = {
   },
 
   exerciseE() {
-
     const fn = () => {
       value = 21;
       return this.value;
     };
 
-
     // What is the value of `this` when we call fn()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -108,10 +104,10 @@ const context = {
       }
     }
 
-    const storm = new Hero('Ororo', 'weather control', true);
+    const storm = new Hero("Ororo", "weather control", true);
 
     // What is the value of `this` when we call storm.identifyHero()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -125,21 +121,20 @@ const context = {
       }
 
       resetGame() {
-        console.log('Clearing the board and starting over');
+        console.log("Clearing the board and starting over");
       }
 
       restart() {
-        setTimeout(function() {
+        setTimeout(function () {
           console.log(`Restarting ${this.title}...`);
         }, 1000);
       }
     }
 
-    const monopoly = new Game('Monopoly');
-
+    const monopoly = new Game("Monopoly");
 
     // What is the value of `this` when we call monopoly.restart()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -149,17 +144,17 @@ const context = {
   exerciseH() {
     const obj = {
       arrowFunction: null,
-      method: function() {
+      method: function () {
         this.arrowFunction = () => {
           return this;
         };
-      }
+      },
     };
 
     obj.method();
 
     // What is the value of `this` when we call obj.arrowFunction()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -167,22 +162,27 @@ const context = {
   },
 
   exerciseI() {
-    const poets = [{
-      name: 'Sappho'
-    }, {
-      name: 'Maya'
-    }, {
-      name: 'Emily'
-    }, {
-      name: 'Audre'
-    }];
+    const poets = [
+      {
+        name: "Sappho",
+      },
+      {
+        name: "Maya",
+      },
+      {
+        name: "Emily",
+      },
+      {
+        name: "Audre",
+      },
+    ];
 
-    poets.map(function(poet) {
+    poets.map(function (poet) {
       return this;
     }, poets);
 
     // What is the value of `this` that gets returned on each iteration of poets.map()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -190,13 +190,13 @@ const context = {
   },
 
   exerciseJ() {
-    const el = $('#btn');
-    el.on('click', function() {
+    const el = $("#btn");
+    el.on("click", function () {
       console.log($(this));
     });
 
     // What is the value of `this` when a user clicks on our #btn element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -205,14 +205,14 @@ const context = {
 
   exerciseK() {
     var store = {
-      fruit: 'grapes',
-      sellMe: function() {
+      fruit: "grapes",
+      sellMe: function () {
         return this.fruit;
-      }
+      },
     };
 
     // What is the value of `this` when we call store.sellMe()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -221,18 +221,18 @@ const context = {
 
   exerciseL() {
     const dog = {
-      breed: 'Chihuahua',
-      getBreed: function(){
+      breed: "Chihuahua",
+      getBreed: function () {
         var _this = this;
 
-        setTimeout(function() {
-          console.log('Your dog is a ' + _this.breed);
+        setTimeout(function () {
+          console.log("Your dog is a " + _this.breed);
         });
-      }
+      },
     };
 
     // What is the value of `this` when we call dog.getBreed()?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -241,21 +241,21 @@ const context = {
 
   exerciseM() {
     const robert = {
-      name: 'Bobo',
-      occupation: 'instructor'
+      name: "Bobo",
+      occupation: "instructor",
     };
 
     const william = {
-      name: 'will',
-      occupation: 'instructor'
+      name: "will",
+      occupation: "instructor",
     };
 
     function makeBirdNoise() {
-      console.log('My name is ' + this.name + ' ... caw! caw!');
+      console.log("My name is " + this.name + " ... caw! caw!");
     }
 
     // What is the value of `this` when we call makeBirdNoise.call(robert);
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -274,14 +274,14 @@ const context = {
       }
 
       makeNoise() {
-        console.log('caw, caw');
+        console.log("caw, caw");
       }
     }
 
-    var firstBird = new Bird('Calvin', 'budgie');
+    var firstBird = new Bird("Calvin", "budgie");
 
     // What is the value of `this` when we call firstBird.delayNoise();
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -289,15 +289,15 @@ const context = {
   },
 
   exerciseO() {
-    const button = document.getElementById('submit');
+    const button = document.getElementById("submit");
 
-    button.addEventListener('click', () => {
+    button.addEventListener("click", () => {
       console.log(this);
-      this.classList.toggle('on');
+      this.classList.toggle("on");
     });
 
     // What is the value of `this` when a user clicks on our button element and the callback is triggered?
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // Annotation:
@@ -306,19 +306,19 @@ const context = {
 
   exerciseP() {
     const child = {
-      totalScreams : 4,
+      totalScreams: 4,
       scream: () => {
         this.totalScreams++;
-      }
+      },
     };
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = "REPLACE WITH YOUR RESULT HERE";
     return result;
 
     // What is the value of `this` when we call child.scream();
     // Annotation:
     // Write your annotation here as a comment
-  }
+  },
 };
 
 module.exports = context;
